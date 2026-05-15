@@ -8,8 +8,8 @@ LIST_FILE="${BASE_DIR}/${ORG}_accessions.txt"
 RESULTS_DIR="${BASE_DIR}/results"
 LOGS_DIR="${BASE_DIR}/logs"
 
-# OPTIMIZED FOR n1-standard-96 (6 jobs x ~16 auto-threads fills all 96 cores perfectly)
-MAX_JOBS=6
+# OPTIMIZED FOR n1-standard-96 (96 vCPUs, 360 GB RAM)
+MAX_JOBS=24
 
 mkdir -p "$RESULTS_DIR"
 mkdir -p "$LOGS_DIR"
@@ -82,11 +82,10 @@ process_srr() {
     fi
 
     # Cleanup container storage layer safely
-    docker run --rm --volumes-from "dee2_${SRR}" alpine rm -rf /dee2/mnt >/dev/null 2>&1  # Safety cleanup
     docker rm -v "dee2_${SRR}" >/dev/null 2>&1
 }
 
-# Export environment variables so the sub-shells spawned by parallel can access them
+# Export environment variables so the sub-shells spawned by xargs can access them
 export -f process_srr
 export ORG RESULTS_DIR BASE_DIR LOGS_DIR
 
@@ -99,7 +98,7 @@ echo "------------------------------------------------"
 echo "Cleaning up any old, lingering containers..."
 docker rm -f $(docker ps -a -q --filter name=dee2_) >/dev/null 2>&1
 
-# 3. Stream the accessions into GNU Parallel to maximize CPU utilization smoothly
-cat "$LIST_FILE" | parallel --ungroup -j "$MAX_JOBS" "bash -c 'process_srr \"{}\" \"$ORG\" \"$RESULTS_DIR\" \"$BASE_DIR\" \"$LOGS_DIR\"'"
+# 3. Stream the accessions into xargs to scale out across your CPU cores
+cat "$LIST_FILE" | xargs -P "$MAX_JOBS" -I {} bash -c 'process_srr "$1" "$ORG" "$RESULTS_DIR" "$BASE_DIR" "$LOGS_DIR"' _ {}
 
 echo "Bulk processing complete! Parallel execution queue has finished processing."
