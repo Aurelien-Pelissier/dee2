@@ -50,11 +50,11 @@ process_srr() {
     mkdir -p "$RUN_OUTPUT_DIR"
 
     # Route internal container outputs directly to the host machine using a volume mount.
-    # We patch the volunteer_pipeline.sh execution by ensuring the container outputs drop into /dee2/output
+    # We patch the volunteer_pipeline.sh execution by ensuring the container outputs drop into /dee2/mnt
     docker run --name "dee2_${SRR}" \
         -v "${BASE_DIR}/pipeline/volunteer_pipeline.sh:/dee2/code/volunteer_pipeline.sh" \
         -v "${BASE_DIR}/ref:/dee2/ref" \
-        -v "${RUN_OUTPUT_DIR}:/dee2/${SRR}" \
+        -v "${RUN_OUTPUT_DIR}:/dee2/mnt" \
         mziemann/tallyup -s "$ORG" -a "$SRR" > "${LOGS_DIR}/${SRR}.log" 2>&1
 
     # Verify if the container successfully generated data into our host-mounted directory
@@ -63,9 +63,13 @@ process_srr() {
         echo "Successfully saved $SRR"
         
         # If the pipeline left a root-level zip inside the folder, pull it up one level for clean aesthetics
-        if [ -f "$RUN_OUTPUT_DIR/${SRR}.zip" ]; then
-            mv "$RUN_OUTPUT_DIR/${SRR}.zip" "$RESULTS_DIR/${SRR}.${ORG}.zip"
+        # volunteer_pipeline.sh typically creates ${SRR}.${ORG}.zip in /dee2/mnt
+        if [ -f "$RUN_OUTPUT_DIR/${SRR}.${ORG}.zip" ]; then
+            mv "$RUN_OUTPUT_DIR/${SRR}.${ORG}.zip" "$RESULTS_DIR/${SRR}.${ORG}.zip"
             # Clean up the now redundant subfolder if everything was inside that zip
+            rm -rf "$RUN_OUTPUT_DIR"
+        elif [ -f "$RUN_OUTPUT_DIR/${SRR}.zip" ]; then
+            mv "$RUN_OUTPUT_DIR/${SRR}.zip" "$RESULTS_DIR/${SRR}.${ORG}.zip"
             rm -rf "$RUN_OUTPUT_DIR"
         fi
 
