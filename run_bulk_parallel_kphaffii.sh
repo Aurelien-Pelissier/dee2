@@ -31,8 +31,9 @@ process_srr() {
     local BASE_DIR="$4"
     local LOGS_DIR="$5"
 
-    # Safely skip completely processed, non-empty files
-    if [ -s "$RESULTS_DIR/${SRR}.${ORG}.zip" ]; then
+    # Define a clean target path to check for completed runs
+    # This checks for either a custom named zip, a standard zip, or an unzipped result directory
+    if [ -s "$RESULTS_DIR/${SRR}.${ORG}.zip" ] || [ -s "$RESULTS_DIR/${SRR}/${SRR}.zip" ] || [ -s "$RESULTS_DIR/${SRR}.zip" ]; then
         echo "Skipping $SRR (already successfully processed)."
         return 0
     fi
@@ -43,24 +44,40 @@ process_srr() {
 
     echo "=== Starting background job for $SRR (stagger delay: ${DELAY}s) ==="
 
-    # Route all internal container logs to individual files inside the logs/ folder
+    # Create a dedicated, isolated output directory for this specific run on the host 
+    # to prevent parallel workers from clobbering each other's files.
+    local RUN_OUTPUT_DIR="${RESULTS_DIR}/${SRR}"
+    mkdir -p "$RUN_OUTPUT_DIR"
+
+    # Route internal container outputs directly to the host machine using a volume mount.
+    # We patch the volunteer_pipeline.sh execution by ensuring the container outputs drop into /dee2/output
     docker run --name "dee2_${SRR}" \
         -v "${BASE_DIR}/pipeline/volunteer_pipeline.sh:/dee2/code/volunteer_pipeline.sh" \
         -v "${BASE_DIR}/ref:/dee2/ref" \
+        -v "${RUN_OUTPUT_DIR}:/dee2/${SRR}" \
         mziemann/tallyup -s "$ORG" -a "$SRR" > "${LOGS_DIR}/${SRR}.log" 2>&1
 
-    # Extract the resulting zip file back to the host machine
-    docker cp "dee2_${SRR}:/dee2/${SRR}.${ORG}.zip" "$RESULTS_DIR/" 2>/dev/null
-    
-    if [ $? -eq 0 ]; then
+    # Verify if the container successfully generated data into our host-mounted directory
+    # (Checking if the directory exists and contains files)
+    if [ -d "$RUN_OUTPUT_DIR" ] && [ "$(ls -A "$RUN_OUTPUT_DIR" 2>/dev/null)" ]; then
         echo "Successfully saved $SRR"
+        
+        # If the pipeline left a root-level zip inside the folder, pull it up one level for clean aesthetics
+        if [ -f "$RUN_OUTPUT_DIR/${SRR}.zip" ]; then
+            mv "$RUN_OUTPUT_DIR/${SRR}.zip" "$RESULTS_DIR/${SRR}.${ORG}.zip"
+            # Clean up the now redundant subfolder if everything was inside that zip
+            rm -rf "$RUN_OUTPUT_DIR"
+        fi
+
         # Delete successful logs to save storage space, keeping failed ones for troubleshooting
         rm -f "${LOGS_DIR}/${SRR}.log"
     else
         echo "Error processing $SRR (Check logs/${SRR}.log for details)."
+        # Remove the empty run folder so it attempts a retry on the next pipeline execution
+        rm -rf "$RUN_OUTPUT_DIR"
     fi
 
-    # Cleanup container storage layer
+    # Cleanup container storage layer safely
     docker rm -v "dee2_${SRR}" >/dev/null 2>&1
 }
 
