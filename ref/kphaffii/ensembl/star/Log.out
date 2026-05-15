@@ -353,7 +353,7 @@ twopassMode                       None
 ----------------------------------------
 
 Finished loading and checking parameters
-May 08 20:44:04 ... starting to generate Genome files
+May 14 22:29:02 ... starting to generate Genome files
 /dee2/ref/kphaffii/ensembl/star/Komagataella_pastoris.GCA_000027005.1.dna.toplevel.fa : chr # 0  "1" chrStart: 0
 /dee2/ref/kphaffii/ensembl/star/Komagataella_pastoris.GCA_000027005.1.dna.toplevel.fa : chr # 1  "2" chrStart: 2883584
 /dee2/ref/kphaffii/ensembl/star/Komagataella_pastoris.GCA_000027005.1.dna.toplevel.fa : chr # 2  "3" chrStart: 5505024
@@ -361,46 +361,46 @@ May 08 20:44:04 ... starting to generate Genome files
 Estimated genome size=210699328   9699328   201000000
 GstrandBit=32
 Number of SA indices: 18430792
-May 08 20:44:04 ... starting to sort Suffix Array. This may take a long time...
+May 14 22:29:02 ... starting to sort Suffix Array. This may take a long time...
 Number of chunks: 8;   chunks size limit: 21063760 bytes
-May 08 20:44:04 ... sorting Suffix Array chunks and saving them to disk...
-Writing 2621976 bytes into /dee2/ref/kphaffii/ensembl/star/SA_7 ; empty space on disk = 960648286208 bytes ... done
-Writing 20641656 bytes into /dee2/ref/kphaffii/ensembl/star/SA_6 ; empty space on disk = 960645656576 bytes ... done
-Writing 20820312 bytes into /dee2/ref/kphaffii/ensembl/star/SA_0 ; empty space on disk = 960625012736 bytes ... done
-Writing 20355896 bytes into /dee2/ref/kphaffii/ensembl/star/SA_3 ; empty space on disk = 960604188672 bytes ... done
-Writing 20811864 bytes into /dee2/ref/kphaffii/ensembl/star/SA_2 ; empty space on disk = 960583831552 bytes ... done
-Writing 20478984 bytes into /dee2/ref/kphaffii/ensembl/star/SA_1 ; empty space on disk = 960563015680 bytes ... done
-Writing 21028944 bytes into /dee2/ref/kphaffii/ensembl/star/SA_5 ; empty space on disk = 960542535680 bytes ...Writing 20686704 bytes into /dee2/ref/kphaffii/ensembl/star/SA_4 ; empty space on disk = 960522108928 bytes ... done
+May 14 22:29:02 ... sorting Suffix Array chunks and saving them to disk...
+Writing 2621976 bytes into /dee2/ref/kphaffii/ensembl/star/SA_7 ; empty space on disk = 1022225281024 bytes ... done
+Writing 20820312 bytes into /dee2/ref/kphaffii/ensembl/star/SA_0 ; empty space on disk = 1022222651392 bytes ...Writing 20641656 bytes into /dee2/ref/kphaffii/ensembl/star/SA_6 ; empty space on disk = 1022203990016 bytes ... done
+Writing 20478984 bytes into /dee2/ref/kphaffii/ensembl/star/SA_1 ; empty space on disk = 1022192295936 bytes ... done
  done
-May 08 20:44:06 ... loading chunks from disk, packing SA...
-May 08 20:44:06 ... finished generating suffix array
-May 08 20:44:06 ... generating Suffix Array index
-May 08 20:44:17 ... completed Suffix Array index
-May 08 20:44:17 ..... processing annotations GTF
+Writing 21028944 bytes into /dee2/ref/kphaffii/ensembl/star/SA_5 ; empty space on disk = 1022160703488 bytes ... done
+Writing 20355896 bytes into /dee2/ref/kphaffii/ensembl/star/SA_3 ; empty space on disk = 1022139670528 bytes ...Writing 20811864 bytes into /dee2/ref/kphaffii/ensembl/star/SA_2 ; empty space on disk = 1022134665216 bytes ...Writing 20686704 bytes into /dee2/ref/kphaffii/ensembl/star/SA_4 ; empty space on disk = 1022105837568 bytes ... done
+ done
+ done
+May 14 22:29:03 ... loading chunks from disk, packing SA...
+May 14 22:29:04 ... finished generating suffix array
+May 14 22:29:04 ... generating Suffix Array index
+May 14 22:29:11 ... completed Suffix Array index
+May 14 22:29:11 ..... processing annotations GTF
 Processing pGe.sjdbGTFfile=/dee2/ref/kphaffii/ensembl/star/Komagataella_pastoris.GCA_000027005.1.62.gtf, found:
 		5392 transcripts
 		5970 exons (non-collapsed)
 		578 collapsed junctions
-May 08 20:44:17 ..... finished GTF processing
-May 08 20:44:17   Loaded database junctions from the GTF file: /dee2/ref/kphaffii/ensembl/star/Komagataella_pastoris.GCA_000027005.1.62.gtf: 578 total junctions
+May 14 22:29:11 ..... finished GTF processing
+May 14 22:29:11   Loaded database junctions from the GTF file: /dee2/ref/kphaffii/ensembl/star/Komagataella_pastoris.GCA_000027005.1.62.gtf: 578 total junctions
 
-May 08 20:44:17   Finished preparing junctions
-May 08 20:44:17 ..... inserting junctions into the genome indices
-May 08 20:44:18   Finished SA search: number of new junctions=578, old junctions=0
-May 08 20:44:18   Finished sorting SA indicesL nInd=231194
+May 14 22:29:11   Finished preparing junctions
+May 14 22:29:11 ..... inserting junctions into the genome indices
+May 14 22:29:11   Finished SA search: number of new junctions=578, old junctions=0
+May 14 22:29:11   Finished sorting SA indicesL nInd=231194
 Genome size with junctions=9815506  9699328   116178
 GstrandBit1=32   GstrandBit=32
-May 08 20:44:19   Finished inserting junction indices
-May 08 20:44:28   Finished SAi
-May 08 20:44:28 ..... finished inserting junctions into genome
-May 08 20:44:28 ... writing Genome to disk ...
-Writing 9815506 bytes into /dee2/ref/kphaffii/ensembl/star/Genome ; empty space on disk = 960647704576 bytes ... done
+May 14 22:29:12   Finished inserting junction indices
+May 14 22:29:21   Finished SAi
+May 14 22:29:21 ..... finished inserting junctions into genome
+May 14 22:29:21 ... writing Genome to disk ...
+Writing 9815506 bytes into /dee2/ref/kphaffii/ensembl/star/Genome ; empty space on disk = 1022235095040 bytes ... done
 SA size in bytes: 76980696
-May 08 20:44:28 ... writing Suffix Array to disk ...
-Writing 76980696 bytes into /dee2/ref/kphaffii/ensembl/star/SA ; empty space on disk = 960637886464 bytes ... done
-May 08 20:44:28 ... writing SAindex to disk
-Writing 8 bytes into /dee2/ref/kphaffii/ensembl/star/SAindex ; empty space on disk = 960560902144 bytes ... done
-Writing 120 bytes into /dee2/ref/kphaffii/ensembl/star/SAindex ; empty space on disk = 960560902144 bytes ... done
-Writing 1565873491 bytes into /dee2/ref/kphaffii/ensembl/star/SAindex ; empty space on disk = 960560902144 bytes ... done
-May 08 20:44:32 ..... finished successfully
+May 14 22:29:21 ... writing Suffix Array to disk ...
+Writing 76980696 bytes into /dee2/ref/kphaffii/ensembl/star/SA ; empty space on disk = 1022302265344 bytes ... done
+May 14 22:29:21 ... writing SAindex to disk
+Writing 8 bytes into /dee2/ref/kphaffii/ensembl/star/SAindex ; empty space on disk = 1022225281024 bytes ... done
+Writing 120 bytes into /dee2/ref/kphaffii/ensembl/star/SAindex ; empty space on disk = 1022225281024 bytes ... done
+Writing 1565873491 bytes into /dee2/ref/kphaffii/ensembl/star/SAindex ; empty space on disk = 1022225281024 bytes ... done
+May 14 22:29:22 ..... finished successfully
 DONE: Genome generation, EXITING

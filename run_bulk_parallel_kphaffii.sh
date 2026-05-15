@@ -78,6 +78,6 @@ echo "Cleaning up any old, lingering containers..."
 docker rm -f $(docker ps -a -q --filter name=dee2_) >/dev/null 2>&1
 
 # 3. Stream the accessions into xargs to scale out across your CPU cores
-cat "$LIST_FILE" | xargs -P "$MAX_JOBS" -I {} bash -c 'process_srr "{}" "$ORG" "$RESULTS_DIR" "$BASE_DIR" "$LOGS_DIR"'
+cat "$LIST_FILE" | xargs -P "$MAX_JOBS" -I {} bash -c 'process_srr "$1" "$ORG" "$RESULTS_DIR" "$BASE_DIR" "$LOGS_DIR"' _ {}
 
 echo "Bulk processing complete! Parallel execution queue has finished processing."
