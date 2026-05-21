@@ -57,6 +57,9 @@ process_srr() {
         -v "${RUN_OUTPUT_DIR}:/dee2/mnt" \
         mziemann/tallyup -s "$ORG" -a "$SRR" > "${LOGS_DIR}/${SRR}.log" 2>&1
 
+    # Fix ownership of the output directory and its contents before host-level move/rm
+    docker run --rm -v "${RUN_OUTPUT_DIR}:/mnt" alpine chown -R $(id -u):$(id -g) /mnt
+
     # Verify if the container successfully generated data into our host-mounted directory
     # (Checking if the directory exists and contains files)
     if [ -d "$RUN_OUTPUT_DIR" ] && [ "$(ls -A "$RUN_OUTPUT_DIR" 2>/dev/null)" ]; then
@@ -81,7 +84,7 @@ process_srr() {
         rm -rf "$RUN_OUTPUT_DIR"
     fi
 
-    # Cleanup container storage layer safely
+    # Cleanup container
     docker rm -v "dee2_${SRR}" >/dev/null 2>&1
 }
 
