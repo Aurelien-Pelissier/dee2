@@ -1,3 +1,13 @@
+## Forked by Aurelien pelissier to do the following:
+* Adding support for Komagataella phaffii
+* Processing bash script for running DEE2 in parallell `run_bulk_parallel_kphaffi.sh`
+* Python processing script `compile_pichia_results.py` to generate final file following DEE2 standard pipeline.
+  
+-> DEE2 doc below
+----------------------
+
+
+
 # DEE2
 The aim of DEE2 is to make all RNA-seq data freely available to everyone. DEE2 consists of three parts:
 * Webserver where end-users can search for and obtain data-sets of interest 
@@ -7,13 +17,6 @@ The aim of DEE2 is to make all RNA-seq data freely available to everyone. DEE2 c
 DEE2 currently supports analysis of several major species including A. thaliana , C. elegans, D. melanogaster, D. rerio, E. coli, H. sapiens, M. musculus, R. norvegicus and S. cerevisiae. The DEE2 pipeline downloads data from SRA and processes it, providing tabulated data that can be used in downstream statistical analysis.
 
 We have recently added support for B. distachyon, G. max, H. vulgare, O. sativa, P. trichocarpa, S. bicolor, S. lycopersicum, S. tuberosum, T. aestivum, V. vinifera and Z. mays.
-
-## Forked by Aurelien pelissier to do the following:
-* Adding support for Komagataella phaffii
-* Processing bash script for running DEE2 in parallell `run_bulk_parallel_kphaffi.sh`
-* Python processing script `compile_pichia_results.py` to generate final file following DEE2 standard pipeline.
--> DEE2 doc below
-----------------------
 
 ## How can I access the processed data?
 The processed data is available at http://dee2.io and can be also accessed using our specially developed [R interface](https://bioconductor.org/packages/getDEE2/).
