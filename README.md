@@ -12,6 +12,8 @@ We have recently added support for B. distachyon, G. max, H. vulgare, O. sativa,
 * Adding support for Komagataella phaffii
 * Processing bash script for running DEE2 in parallell `run_bulk_parallel_kphaffi.sh`
 * Python processing script `compile_pichia_results.py` to generate final file following DEE2 standard pipeline.
+-> DEE2 doc below
+----------------------
 
 ## How can I access the processed data?
 The processed data is available at http://dee2.io and can be also accessed using our specially developed [R interface](https://bioconductor.org/packages/getDEE2/).
