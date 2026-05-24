@@ -8,6 +8,11 @@ DEE2 currently supports analysis of several major species including A. thaliana 
 
 We have recently added support for B. distachyon, G. max, H. vulgare, O. sativa, P. trichocarpa, S. bicolor, S. lycopersicum, S. tuberosum, T. aestivum, V. vinifera and Z. mays.
 
+## Forked by Aurelien pelissier to do the following:
+* Adding support for Komagataella phaffii
+* Processing bash script for running DEE2 in parallell `run_bulk_parallel_kphaffi.sh`
+* Python processing script `compile_pichia_results.py` to generate final file following DEE2 standard pipeline.
+
 ## How can I access the processed data?
 The processed data is available at http://dee2.io and can be also accessed using our specially developed [R interface](https://bioconductor.org/packages/getDEE2/).
 Project bundles are available [here](https://dee2.io/huge/), and bulk data dumps are available [here](https://dee2.io/mx/).
