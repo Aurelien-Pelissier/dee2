@@ -3,7 +3,7 @@
 * Processing bash script for running DEE2 in parallell `run_bulk_parallel_kphaffi.sh`
 * Python processing script `compile_pichia_results.py` to generate final file following DEE2 standard pipeline.
   
--> DEE2 doc below
+
 ----------------------
 
 
